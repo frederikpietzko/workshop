@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Components</title>
+</head>
+<body>
+
+<!-- Text Input Fragment -->
+<div th:fragment="textInput(name, label, value, error, helperText, placeholder)">
+    <div class="form-group">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <input 
+            type="text" 
+            th:id="${name}" 
+            th:name="${name}" 
+            th:value="${value}"
+            th:placeholder="${placeholder}"
+            th:class="${error != null ? 'form-control error' : 'form-control'}"
+        />
+        <span class="error-message" th:if="${error != null}" th:text="${error}">Error message</span>
+        <span class="helper-text" th:if="${helperText != null && error == null}" th:text="${helperText}">Helper text</span>
+    </div>
+</div>
+
+<!-- Search Input Fragment -->
+<div th:fragment="searchInput(name, value, placeholder)">
+    <div class="search-group">
+        <input 
+            type="text" 
+            th:id="${name}" 
+            th:name="${name}" 
+            th:value="${value}"
+            th:placeholder="${placeholder}"
+            class="search-input"
+        />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</div>
+
+<!-- Product Card Fragment -->
+<div th:fragment="productCard(product)" class="product-card">
+    <h3 class="product-name" th:text="${product.name}">Product Name</h3>
+    <div class="product-details">
+        <span class="product-price" th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}">$0.00</span>
+        <span class="product-category" th:text="${product.category}">Category</span>
+    </div>
+    <p class="product-description" th:text="${product.description}">Product description</p>
+</div>
+
+</body>
+</html>

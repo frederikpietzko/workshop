@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>User Registration (Working)</h1>
+        
+        <div th:if="${success}" class="success-message">
+            Registration successful!
+        </div>
+        
+        <form th:object="${user}" 
+              hx-post="/register" 
+              hx-target="#form-container"
+              hx-swap="outerHTML"
+              hx-indicator="#spinner">
+            
+            <div id="form-container">
+                <div th:replace="~{fragments/components :: textInput('username', 'Username', 'text', 'Enter username')}"></div>
+                <div th:replace="~{fragments/components :: textInput('email', 'Email', 'email', 'Enter email')}"></div>
+                <div th:replace="~{fragments/components :: textInput('password', 'Password', 'password', 'Enter password')}"></div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a href="/" class="btn btn-secondary">Back</a>
+                </div>
+            </div>
+            
+            <div th:replace="~{fragments/components :: spinner}"></div>
+        </form>
+    </div>
+</body>
+</html>

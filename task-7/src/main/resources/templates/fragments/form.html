@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Fragment</title>
+</head>
+<body>
+
+<form id="item-form"
+      th:fragment="item-form"
+      th:object="${item}"
+      hx-post="/items"
+      hx-target="#item-form"
+      hx-swap="outerHTML">
+    <div th:replace="~{fragments/components :: textInput('name', 'Name', 'text', 'Enter item name')}"></div>
+    <div th:replace="~{fragments/components :: textArea('description', 'Description', 'Enter item description', 4)}"></div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Item</button>
+    </div>
+</form>
+
+</body>
+</html>

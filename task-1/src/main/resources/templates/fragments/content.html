@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="loaded-content">
+        <h2>Content Loaded Successfully!</h2>
+        <p>This content was loaded from the server using SSR.</p>
+        <p>Current time: <span th:text="${#temporals.format(#temporals.createNow(), 'HH:mm:ss')}"></span></p>
+    </div>
+</body>
+</html>

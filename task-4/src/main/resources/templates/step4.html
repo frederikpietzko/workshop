@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Step 4: Payment</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Car Order Wizard</h1>
+
+    <div th:replace="~{fragments/form-elements :: wizard-steps(${currentStep})}"></div>
+
+    <h2>Step 4: Payment</h2>
+
+    <form th:action="@{/order/step4}" th:object="${paymentInformationForm}" method="post">
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('paymentMethod') ? 'has-error' : ''}">
+            <label>Payment Method</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="payment_credit" name="paymentMethod" value="Credit Card" th:field="*{paymentMethod}">
+                    <label for="payment_credit">Credit Card</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="payment_debit" name="paymentMethod" value="Debit Card" th:field="*{paymentMethod}">
+                    <label for="payment_debit">Debit Card</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="payment_bank" name="paymentMethod" value="Bank Transfer" th:field="*{paymentMethod}">
+                    <label for="payment_bank">Bank Transfer</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="payment_financing" name="paymentMethod" value="Financing" th:field="*{paymentMethod}">
+                    <label for="payment_financing">Financing</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="payment_lease" name="paymentMethod" value="Lease" th:field="*{paymentMethod}">
+                    <label for="payment_lease">Lease</label>
+                </div>
+            </div>
+            <span class="helper-text">Select your preferred payment method (this is a simulated selection)</span>
+            <span th:if="${#fields.hasErrors('paymentMethod')}"
+                  th:errors="*{paymentMethod}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('billingAddress') ? 'has-error' : ''}">
+            <label for="billingAddress">Billing Address</label>
+            <textarea id="billingAddress"
+                      name="billingAddress"
+                      th:field="*{billingAddress}"
+                      placeholder="Enter billing address including street, city, postal code"></textarea>
+            <span class="helper-text">Address associated with your payment method</span>
+            <span th:if="${#fields.hasErrors('billingAddress')}"
+                  th:errors="*{billingAddress}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="btn-group">
+            <a th:href="@{/order/step3}" class="btn btn-secondary">Previous</a>
+            <button type="submit" class="btn">Next</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

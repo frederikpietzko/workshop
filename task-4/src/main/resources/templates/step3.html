@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Step 3: Delivery Information</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Car Order Wizard</h1>
+
+    <div th:replace="~{fragments/form-elements :: wizard-steps(${currentStep})}"></div>
+
+    <h2>Step 3: Delivery Information</h2>
+
+    <form th:action="@{/order/step3}" th:object="${deliveryInformationForm}" method="post">
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('deliveryAddress') ? 'has-error' : ''}">
+            <label for="deliveryAddress">Delivery Address</label>
+            <textarea id="deliveryAddress"
+                      name="deliveryAddress"
+                      th:field="*{deliveryAddress}"
+                      placeholder="Enter full delivery address including street, city, postal code"></textarea>
+            <span class="helper-text">Where should we deliver your vehicle?</span>
+            <span th:if="${#fields.hasErrors('deliveryAddress')}"
+                  th:errors="*{deliveryAddress}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('contactName') ? 'has-error' : ''}">
+            <label for="contactName">Contact Name</label>
+            <input type="text"
+                   id="contactName"
+                   name="contactName"
+                   th:field="*{contactName}"
+                   placeholder="Full name">
+            <span class="helper-text">Primary contact person for this order</span>
+            <span th:if="${#fields.hasErrors('contactName')}"
+                  th:errors="*{contactName}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('contactEmail') ? 'has-error' : ''}">
+            <label for="contactEmail">Contact Email</label>
+            <input type="email"
+                   id="contactEmail"
+                   name="contactEmail"
+                   th:field="*{contactEmail}"
+                   placeholder="email@example.com">
+            <span class="helper-text">We'll send order updates to this email</span>
+            <span th:if="${#fields.hasErrors('contactEmail')}"
+                  th:errors="*{contactEmail}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('contactPhone') ? 'has-error' : ''}">
+            <label for="contactPhone">Contact Phone</label>
+            <input type="tel"
+                   id="contactPhone"
+                   name="contactPhone"
+                   th:field="*{contactPhone}"
+                   placeholder="+1234567890">
+            <span class="helper-text">Phone number for delivery coordination</span>
+            <span th:if="${#fields.hasErrors('contactPhone')}"
+                  th:errors="*{contactPhone}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="btn-group">
+            <a th:href="@{/order/step2}" class="btn btn-secondary">Previous</a>
+            <button type="submit" class="btn">Next</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+<div class="container">
+    <h1>User Registration</h1>
+
+    <!-- Success Message -->
+    <div th:if="${successMessage}" class="success-message">
+        <p th:text="${successMessage}">Success message</p>
+    </div>
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+
+        <!-- Username Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Username',
+            'username',
+            'text',
+            'Enter your username',
+            'Username must be 3-50 characters, letters, numbers and underscores only'
+        )}"></div>
+
+        <!-- Email Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Email',
+            'email',
+            'email',
+            'Enter your email address',
+            'We will never share your email with anyone'
+        )}"></div>
+
+        <!-- Password Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Password',
+            'password',
+            'password',
+            'Enter your password',
+            'Password must be at least 8 characters with uppercase, lowercase, and number'
+        )}"></div>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+</div>
+</body>
+</html>

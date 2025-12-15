@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Step 1: Product Selection</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Car Order Wizard</h1>
+
+    <div th:replace="~{fragments/form-elements :: wizard-steps(${currentStep})}"></div>
+
+    <h2>Step 1: Product Selection</h2>
+
+    <form th:action="@{/order/step1}" th:object="${productSelectionForm}" method="post">
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('productCategory') ? 'has-error' : ''}">
+            <label for="productCategory">Product Category</label>
+            <select id="productCategory" name="productCategory" th:field="*{productCategory}">
+                <option value="">-- Select Category --</option>
+                <option value="New">New Car</option>
+                <option value="Used">Used Car</option>
+                <option value="Certified">Certified Pre-Owned</option>
+            </select>
+            <span class="helper-text">Select the type of vehicle you want to order</span>
+            <span th:if="${#fields.hasErrors('productCategory')}"
+                  th:errors="*{productCategory}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('makeId') ? 'has-error' : ''}">
+            <label for="makeId">Make</label>
+            <select id="makeId" name="makeId" th:field="*{makeId}">
+                <option value="">-- Select Make --</option>
+                <option th:each="make : ${makes}"
+                        th:value="${make.id}"
+                        th:text="${make.name}">Make</option>
+            </select>
+            <span class="helper-text">Select the car manufacturer</span>
+            <span th:if="${#fields.hasErrors('makeId')}"
+                  th:errors="*{makeId}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('modelId') ? 'has-error' : ''}">
+            <label for="modelId">Model</label>
+            <select id="modelId" name="modelId" th:field="*{modelId}">
+                <option value="">-- Select Model --</option>
+            </select>
+            <span class="helper-text">Select the car model (choose make first)</span>
+            <span th:if="${#fields.hasErrors('modelId')}"
+                  th:errors="*{modelId}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
+            <label for="quantity">Quantity</label>
+            <input type="number"
+                   id="quantity"
+                   name="quantity"
+                   th:field="*{quantity}"
+                   min="1"
+                   value="1">
+            <span class="helper-text">How many vehicles do you want to order?</span>
+            <span th:if="${#fields.hasErrors('quantity')}"
+                  th:errors="*{quantity}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn">Next</button>
+        </div>
+    </form>
+
+    <script>
+        // Dynamic model loading based on make selection
+        document.getElementById('makeId').addEventListener('change', function() {
+            const makeId = this.value;
+            const modelSelect = document.getElementById('modelId');
+
+            modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
+
+            if (makeId) {
+                fetch('/order/api/models?makeId=' + makeId)
+                    .then(response => response.json())
+                    .then(models => {
+                        models.forEach(model => {
+                            const option = document.createElement('option');
+                            option.value = model.id;
+                            option.textContent = model.name;
+                            modelSelect.appendChild(option);
+                        });
+                    });
+            }
+        });
+
+        // Trigger model loading if make is already selected (for validation errors)
+        window.addEventListener('DOMContentLoaded', function() {
+            const makeSelect = document.getElementById('makeId');
+            if (makeSelect.value) {
+                makeSelect.dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

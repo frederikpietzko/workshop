@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables</title>
+</head>
+<body>
+
+<!-- Users Table -->
+<div th:fragment="usersTable(users)">
+    <h2>Users</h2>
+    <div class="table-info">
+        <p>Total users: <strong th:text="${users.size()}">0</strong></p>
+    </div>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">1</td>
+                    <td th:text="${user.username}">username</td>
+                    <td th:text="${user.email}">email@example.com</td>
+                    <td>
+                        <span class="badge" th:text="${user.role != null ? user.role.name : 'N/A'}">ROLE</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Roles Table -->
+<div th:fragment="rolesTable(roles)">
+    <h2>Roles</h2>
+    <div class="table-info">
+        <p>Total roles: <strong th:text="${roles.size()}">0</strong></p>
+    </div>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Permissions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="role : ${roles}">
+                    <td th:text="${role.id}">1</td>
+                    <td th:text="${role.name}">ROLE_NAME</td>
+                    <td th:text="${role.description}">Description</td>
+                    <td>
+                        <span th:if="${role.permissions.isEmpty()}">None</span>
+                        <span th:unless="${role.permissions.isEmpty()}">
+                            <span class="badge badge-small" th:each="perm, iterStat : ${role.permissions}" 
+                                  th:text="${perm.name + (iterStat.last ? '' : ', ')}">PERMISSION</span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Permissions Table -->
+<div th:fragment="permissionsTable(permissions)">
+    <h2>Permissions</h2>
+    <div class="table-info">
+        <p>Total permissions: <strong th:text="${permissions.size()}">0</strong></p>
+    </div>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="permission : ${permissions}">
+                    <td th:text="${permission.id}">1</td>
+                    <td th:text="${permission.name}">PERMISSION_NAME</td>
+                    <td th:text="${permission.description}">Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

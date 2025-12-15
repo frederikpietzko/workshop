@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 - TODO List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>TODO List</h1>
+
+        <div th:replace="~{fragments/todo-form :: todo-form}"></div>
+
+        <div th:if="${#lists.isEmpty(todos)}" class="empty-state">
+            No todos yet. Add one above!
+        </div>
+
+        <ul class="todo-list" th:unless="${#lists.isEmpty(todos)}">
+            <th:block th:each="todo : ${todos}">
+                <li th:replace="~{fragments/todo-item :: todo-item(todo=${todo})}"></li>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>

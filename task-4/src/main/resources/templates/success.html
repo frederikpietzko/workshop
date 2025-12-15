@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Order Success</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="success-message">
+        <div class="success-icon">✓</div>
+        <h2>Order Confirmed Successfully!</h2>
+        <p>Thank you for your order. Your car order has been successfully placed.</p>
+        <p class="order-id">Order ID: <span th:text="${order.id}">12345</span></p>
+
+        <div style="margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <div class="summary-section">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span class="summary-label">Vehicle:</span>
+                    <span class="summary-value" th:text="${order.make.name + ' ' + order.model.name}">Vehicle</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Color:</span>
+                    <span class="summary-value" th:text="${order.color}">Color</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Quantity:</span>
+                    <span class="summary-value" th:text="${order.quantity}">Quantity</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Status:</span>
+                    <span class="summary-value" th:text="${order.status}">Status</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; color: #555; text-align: center;">
+                We'll send a confirmation email to <strong th:text="${order.contactEmail}">email</strong> with further details.
+            </p>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a th:href="@{/order}" class="btn">Place Another Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

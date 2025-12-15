@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        
+        <div th:replace="~{fragments/tabs :: tabs(activeTab=${activeTab})}"></div>
+        
+        <div class="content">
+            <div th:if="${activeTab == 'users'}">
+                <div th:replace="~{fragments/tables :: usersTable(users=${users})}"></div>
+            </div>
+            
+            <div th:if="${activeTab == 'roles'}">
+                <div th:replace="~{fragments/tables :: rolesTable(roles=${roles})}"></div>
+            </div>
+            
+            <div th:if="${activeTab == 'permissions'}">
+                <div th:replace="~{fragments/tables :: permissionsTable(permissions=${permissions})}"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

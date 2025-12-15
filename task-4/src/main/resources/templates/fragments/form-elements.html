@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Elements</title>
+</head>
+<body>
+
+<!-- Text Input Fragment -->
+<div th:fragment="input(name, label, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <input type="text"
+           th:id="${name}"
+           th:name="${name}"
+           th:value="${value}"
+           th:placeholder="${label}">
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Email Input Fragment -->
+<div th:fragment="email(name, label, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <input type="email"
+           th:id="${name}"
+           th:name="${name}"
+           th:value="${value}"
+           th:placeholder="${label}">
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Phone Input Fragment -->
+<div th:fragment="tel(name, label, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <input type="tel"
+           th:id="${name}"
+           th:name="${name}"
+           th:value="${value}"
+           th:placeholder="${label}">
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Number Input Fragment -->
+<div th:fragment="number(name, label, value, error, helperText, min)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <input type="number"
+           th:id="${name}"
+           th:name="${name}"
+           th:value="${value}"
+           th:min="${min != null ? min : 1}">
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Select Dropdown Fragment -->
+<div th:fragment="select(name, label, options, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <select th:id="${name}" th:name="${name}">
+        <option value="">-- Select --</option>
+        <option th:each="option : ${options}"
+                th:value="${option.id}"
+                th:text="${option.name}"
+                th:selected="${value != null && value == option.id}">Option</option>
+    </select>
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Textarea Fragment -->
+<div th:fragment="textarea(name, label, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <textarea th:id="${name}"
+              th:name="${name}"
+              th:text="${value}"
+              th:placeholder="${label}"></textarea>
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Radio Group Fragment -->
+<div th:fragment="radio(name, label, options, value, error, helperText)" class="form-group" th:classappend="${error != null ? 'has-error' : ''}">
+    <label th:text="${label}">Label</label>
+    <div class="radio-group">
+        <div th:each="option : ${options}" class="radio-option">
+            <input type="radio"
+                   th:id="${name + '_' + option}"
+                   th:name="${name}"
+                   th:value="${option}"
+                   th:checked="${value != null && value == option}">
+            <label th:for="${name + '_' + option}" th:text="${option}">Option</label>
+        </div>
+    </div>
+    <span th:if="${helperText != null}" class="helper-text" th:text="${helperText}">Helper text</span>
+    <span th:if="${error != null}" class="error-message" th:text="${error}">Error message</span>
+</div>
+
+<!-- Wizard Steps Fragment -->
+<div th:fragment="wizard-steps(currentStep)">
+    <div class="wizard-steps">
+        <div class="step" th:classappend="${currentStep >= 1 ? (currentStep == 1 ? 'active' : 'completed') : ''}">
+            <div class="step-number">1</div>
+            <div class="step-title">Product</div>
+        </div>
+        <div class="step" th:classappend="${currentStep >= 2 ? (currentStep == 2 ? 'active' : 'completed') : ''}">
+            <div class="step-number">2</div>
+            <div class="step-title">Customization</div>
+        </div>
+        <div class="step" th:classappend="${currentStep >= 3 ? (currentStep == 3 ? 'active' : 'completed') : ''}">
+            <div class="step-number">3</div>
+            <div class="step-title">Delivery</div>
+        </div>
+        <div class="step" th:classappend="${currentStep >= 4 ? (currentStep == 4 ? 'active' : 'completed') : ''}">
+            <div class="step-number">4</div>
+            <div class="step-title">Payment</div>
+        </div>
+        <div class="step" th:classappend="${currentStep >= 5 ? (currentStep == 5 ? 'active' : 'completed') : ''}">
+            <div class="step-number">5</div>
+            <div class="step-title">Confirmation</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

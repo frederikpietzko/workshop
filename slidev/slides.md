@@ -151,37 +151,37 @@ const handleSubmit = async (e) => {
 - Loading States & Indicators
 - Confirmation Dialogs
 
-**11:45 - 12:30** Mittagspause
+**11:45 - 12:30** Übung 2 -> Interaktive Task Liste
 
 --- 
 
 # Workshop Überblick Tag 1
 
-**12:30 - 13:15** Übung 2 -> Interaktive Task Liste
+**12:45 - 13:30** Mittagspause
 
-**13:15 - 13:45** Forms & Validation
+**13:30 - 13:45** Forms & Validation
 
 - Formular Submission
 - Validation Patterns & Error Display
 - Field-Level Validation
 
-**13:45 - 14:15** Übung 3 -> Forms und Validation
+**13:45 - 14:30** Übung 3 -> Forms und Validation
 
-**14:15 - 14:30** Kaffepause
+**14:30 - 14:45** Kaffepause
 
-**14:30 - 15:00** State Management
+**14:45 - 15:00** State Management
 
 - URLs, History API & Sessions
 - Boosting
 - Redirects
 
-**15:00 - 15:30** Übung 4 -> Multi Step Wizard mit JTE
+**15:00 - 15:45** Übung 4 -> Multi Step Wizard mit Thymeleaf
 
 --- 
 
 # Workshop Überblick Tag 1
 
-**15:30 - 16:15** HTMX Events & Advanced Patterns
+**15:45 - 16:15** HTMX Events & Advanced Patterns
 
 - Lifecycle Events und Custom Events
 - Out-of-Band Swaps
@@ -215,25 +215,29 @@ const handleSubmit = async (e) => {
 
 **10:45 - 11:45** Übung 7 Live Notifications
 
-**11:45 - 12:30** Mittagspause
-
-**12:30 - 13:00** Fortgeschrittene UI Pattern
+**11:45 - 12:30** Fortgeschrittene UI Pattern
 
 - Lazy Loading & Infinte Scroll
 - Modals & Overlays (HTML5 Tricks)
-- Optimistic UI
 
-**13:00 - 13:30** Übung 8 Infinite Scroll
 
---- 
+---
 
 # Workshop Überblick Tag 2
+
+**12:45 - 13:00** Mittagspause
+
+**13:00 - 13:30** Übung 8 Infinite Scroll
 
 **13:30 - 14:00** Data Tables
 
 - Sorting, Filtering & Pagination
 - Caching
 - Debounce & Throttle
+
+---
+
+# Workshop Überblick Tag 2
 
 **14:00 - 14:30** Übung 9 Data Tables
 
@@ -244,280 +248,69 @@ const handleSubmit = async (e) => {
 **17:15 - 17:30** Wrapup & Feedback
 
 ---
-
-# Vorraussetzungen
-
-- JDK 21+
-- Gradle (IntelliJ regelt)
-- Browser mit Devtools
-
----
-layout: two-cols-header
+src: ./pages/00-intro-basics.md
 ---
 
-# Intro und Überblick
-
-::left::
-
-```mermaid {scale: 0.6}
-sequenceDiagram
-    User->>+Browser: Navigiere zu cps.inform.de
-    Browser->>+Server: load index.html
-    Server->>-Browser: index.html
-    User->>+Browser: Click auf Button
-    Browser->>+Server: POST /someaction
-    Server->>Server: Render HTML Snippet
-    Server->>-Browser: HTML Snippet
-    Browser->>Browser: Swap HTML Snippet
-```
-
-::right::
-
-<v-clicks>
-
-- User navigiert zu Seite
-- Browser requested HTML
-- Server antwortet mit gesamter Seite
-- User Clickt auf Button und HTMX macht AJAX Post
-- Server rendert und Antwortet mit einem HTMl Snippet
-- HTMX Swapped DOM Nodes
-
-</v-clicks>
-
+---
+src: ./pages/01-advanced-attributes.md
 ---
 
-# Beispiel
+---
+src: ./pages/02-forms-validation.md
+---
 
-<v-clicks>
+---
+src: ./pages/03-state-management.md
+---
 
-```html
-<!-- Initial HTML vom Server -->
-<div id="counter">Count: 0</div>
-<button hx-post="/increment" 
-        hx-target="#counter"
-        hx-swap="innerHTML">
-  Increment
-</button>
-```
+---
+src: ./pages/04-events-patterns.md
+---
 
-**Server Response (HTML Snippet):**
+---
+src: ./pages/05-recap.md
+---
 
-```html
-Count: 1
-```
+---
+src: ./pages/06-error-handling.md
+---
 
-**Result:** HTMX ersetzt nur den Inhalt von `#counter`, keine komplette Page Reload!
+---
+src: ./pages/07-realtime-updates.md
+---
 
-</v-clicks>
+---
+src: ./pages/08-lazy-loading-infinite-scroll.md
+---
 
+---
+src: ./pages/09-data-tables.md
+---
 
 ---
 
-# Technische Details
+# Open Workshop 🚀
+
+**14:45 - 17:15 - Eure Zeit!**
+
+<br>
 
 <v-clicks>
 
-- **Dateigröße**: ~14kb minified + gzipped
-  - Zum Vergleich: React ~40kb+, Vue ~30kb+
-- **Browser-Kompatibilität**: Alle modernen Browser (IE11+)
-- **Installation**: 
-  - Via CDN (kein Build-Step notwendig)
-  - Via npm/yarn für Build-Prozesse
-- **Performance**: 
-  - Weniger JavaScript → Schnelleres Parsing
-  - Server-Side Rendering → Schnellere First Paint
-  - Weniger Bundle-Size → Schnellere Downloads
+**Bringt eure eigenen Themen mit!**
+
+- Konkrete **Use Cases** aus euren Projekten?
+- **Spezifische Probleme** die ihr lösen wollt?
+- **Patterns** die ihr vertiefen möchtet?
+- **Fragen** zu Architecture, Performance, Testing?
+- **Ideen** die ihr ausprobieren wollt?
+
+<br>
+
+### Lasst uns gemeinsam an euren Herausforderungen arbeiten! 💪
+
+<br>
+
+**Ressourcen:** https://htmx.org | https://github.com/wimdeblauwe/htmx-spring-boot
 
 </v-clicks>
-
----
-
-# Philosophie & Konzepte
-
-<v-clicks>
-
-**HATEOAS** (Hypermedia as the Engine of Application State)
-- Server kontrolliert Navigation und UI-Zustand durch Hypermedia (HTML)
-- Client muss keine Business-Logik kennen
-
-**Locality of Behavior** 
-- Code ist dort wo er gebraucht wird - direkt im HTML
-- Keine Trennung zwischen Markup und Verhalten über Dateien hinweg
-
-**Progressive Enhancement**
-- Funktioniert ohne JavaScript (Fallback auf normale Forms)
-- JavaScript erweitert die Funktionalität schrittweise
-- Graceful Degradation automatisch
-
-</v-clicks>
-
----
-
-# Kombinierbarkeit mit JavaScript
-
-**Interactive Islands Pattern**
-
-```html
-<!-- HTMX für Datenaustausch -->
-<div hx-get="/products" hx-trigger="load">
-  <!-- Alpine.js für lokale Interaktivität -->
-  <div x-data="{ count: 0 }">
-    <button @click="count++">Count: <span x-text="count"></span></button>
-  </div>
-</div>
-```
-
-- HTMX übernimmt Server-Kommunikation
-- Alpine.js, Vanilla JS für lokale UI-Logik
-- Best of both worlds: Server-State + Client-State
-- Bibliotheken wie Alpine.js, Petite-Vue, _hyperscript perfekt kombinierbar
-
-
----
-
-# SPA vs. MPA vs. HTMX Hybrid
-
-<div class="grid grid-cols-3 gap-4 text-sm">
-
-<div>
-
-**SPA** 
-(React, Vue, Angular)
-
-<v-clicks>
-
-✅ Sehr interaktiv  
-✅ App-like Feel  
-✅ Client-State Management
-
-❌ Große Bundle-Size  
-❌ Komplexer Build  
-❌ SEO Herausforderungen  
-❌ Hohe Komplexität
-
-</v-clicks>
-
-</div>
-
-<div>
-
-**MPA** 
-(Traditional Server-Side)
-
-<v-clicks>
-
-✅ Einfach  
-✅ SEO-friendly  
-✅ Schnelle First Paint
-
-❌ Page Reloads  
-❌ Kein State  
-❌ Langsames UX
-
-</v-clicks>
-
-</div>
-
-<div>
-
-**HTMX Hybrid**
-
-<v-clicks>
-
-✅ Partial Updates  
-✅ Einfachheit  
-✅ SEO-friendly  
-✅ Progressive Enhancement  
-✅ Kleine Bundle-Size
-
-⚠️ Weniger für hochinteraktive Apps  
-⚠️ Server-Rendering notwendig
-
-</v-clicks>
-
-</div>
-
-</div>
-
----
-
-# HTMX Request Attribute
-
-<v-clicks>
-
-- `hx-get`, `hx-post`, `hx-put`, `hx-patch`, `hx-delete` - HTTP Methode & URL
-- `hx-trigger` - Welches Event löst den Request aus (default: `click` bei Button, `change` bei Input)
-- `hx-include` - Zusätzliche Elemente in Request einbeziehen
-- `hx-params` - Welche Parameter sollen mitgeschickt werden
-- `hx-target` - Welches Element wird aktualisiert (default: Element selbst)
-- `hx-swap` - Wie wird der Content eingefügt (`innerHTML`, `outerHTML`, `beforebegin`, `afterend`, etc.)
-- `hx-swap-oob` - Out-of-Band Swaps für mehrere Elemente gleichzeitig
-- `hx-indicator` - Loading Indicator anzeigen während Request läuft
-- `hx-confirm` - Bestätigungsdialog vor Request anzeigen
-
-</v-clicks>
-
----
-
-# HTMX Response Attribute
-
-<v-clicks>
-
-- `HX-Trigger` - Löst Events auf dem Client aus nach Response
-- `HX-Retarget` - Ändert das Ziel-Element für den Swap
-- `HX-Reswap` - Ändert die Swap-Strategie für die Response
-- `HX-Redirect` - Führt einen Client-seitigen Redirect durch
-- `HX-Refresh` - Refresht die komplette Seite
-- `HX-Location` - Client-seitiger Redirect mit HTMX Request
-- `HX-Push-Url` - Updated die Browser URL (History API)
-- `HX-Replace-Url` - Ersetzt die Browser URL ohne History Eintrag
-
-</v-clicks>
-
----
-
-# HTMX Request & Response Header
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-
-**Request Header (Browser → Server):**
-
-<v-clicks>
-
-- `HX-Request: true` - Kennzeichnet HTMX Request
-- `HX-Trigger` - ID des auslösenden Elements
-- `HX-Trigger-Name` - Name des auslösenden Elements
-- `HX-Target` - ID des Ziel-Elements
-- `HX-Current-URL` - Aktuelle URL im Browser
-- `HX-Prompt` - Wert aus Prompt Dialog
-
-</v-clicks>
-
-</div>
-
-<div>
-
-**Response Header (Server → Browser):**
-
-<v-clicks>
-
-- `HX-Trigger` - Events triggern nach Swap
-- `HX-Redirect` - Client-Redirect durchführen
-- `HX-Refresh` - Seite neu laden
-- `HX-Push-Url` - URL in History pushen
-- `HX-Retarget` - Anderes Ziel wählen
-- `HX-Reswap` - Swap-Methode ändern
-
-</v-clicks>
-
-</div>
-
-</div>
-
----
-
-# Übung 1 - Warmup
-
-Baut eine kleine HTMX App mit Thymeleaf und Spring MVC
