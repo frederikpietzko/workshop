@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+  session:
+    store-type: jdbc
+    timeout: 30m
+    jdbc:
+      initialize-schema: embedded
+      table-name: SPRING_SESSION
+      cleanup-cron: "0 */15 * * * *"
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+server:
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        name: WORKSHOP_SESSION
+        http-only: true
+        same-site: lax

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+<div th:replace="~{fragments/global-error :: globalError(errors=${errors})}"></div>
+<script th:inline="javascript">
+    document.body.addEventListener("htmx:sendError", function() {
+        console.log("Error occurred");
+        let errorContainer = document.getElementById("global-error-container");
+
+        errorContainer.innerHTML = `
+            <div class="global-error">
+                <div class="error-icon">⚠</div>
+                <div class="error-content">
+                    <h4 class="error-title">An error occurred</h4>
+                    <ul class="error-list">
+                        <li>You are offline!</li>
+                    </ul>
+                </div>
+                <button class="error-close" onclick="this.parentElement.style.display='none'">×</button>
+            </div>
+        `
+    })
+</script>
+<div class="container">
+    <h1>User Registration (Working)</h1>
+
+    <div th:if="${success}" class="success-message">
+        Registration successful!
+    </div>
+
+    <form th:object="${user}"
+          hx-post="/register"
+          hx-target="#form-container"
+          hx-swap="outerHTML"
+          hx-indicator="#spinner">
+
+        <div id="form-container">
+            <div th:replace="~{fragments/components :: textInput('username', 'Username', 'text', 'Enter username')}"></div>
+            <div th:replace="~{fragments/components :: textInput('email', 'Email', 'email', 'Enter email')}"></div>
+            <div th:replace="~{fragments/components :: textInput('password', 'Password', 'password', 'Enter password')}"></div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a href="/" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/components :: spinner}"></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!--/*@thymesVar id="todo" type="iits.workshop.htmx.TodoItem"*/-->
+<input th:fragment="todo-item-edit(todo)"
+       th:id="'todo-item-input-'+${todo.id}"
+       th:value="${todo.text}"
+       name="text"
+       hx-trigger="blur, keyup[keyCode==13]"
+       hx-target="closest .todo-item"
+       hx-swap="outerHTML"
+       th:hx-put="@{/todos/{id}(id=${todo.id})}"
+       class="todo-input"
+       xmlns:th="http://www.thymeleaf.org"
+/>

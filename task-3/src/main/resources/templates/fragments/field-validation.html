@@ -1,0 +1,5 @@
+<div th:fragment="validation-message" xmlns:th="http://www.thymeleaf.org">
+    <span th:if="${errorMessage != null}"
+          class="error-text"
+          th:text="${errorMessage}">Error message</span>
+</div>

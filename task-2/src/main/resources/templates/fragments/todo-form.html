@@ -1,0 +1,17 @@
+<form id="todo-form"
+      th:fragment="todo-form"
+      th:action="@{/todos}"
+      method="post"
+      class="todo-form"
+      th:hx-post="@{/todos}"
+      hx-target="this"
+      hx-swap="outerHTML"
+      >
+    <input type="text"
+           name="text"
+           class="todo-input"
+           placeholder="Enter a new todo..."
+           required
+           autofocus>
+    <button type="submit" class="btn">Add Todo</button>
+</form>

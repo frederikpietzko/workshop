@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Catalog</h1>
+        
+        <div class="search-section">
+            <form method="get" action="/">
+                <div th:replace="~{fragments/components :: searchInput(
+                    name='search',
+                    value=${search},
+                    placeholder='Search products by name, category, price, or description...'
+                )}"></div>
+            </form>
+        </div>
+
+        <div class="products-section">
+            <div class="products-count">
+                <p th:if="${products.size() > 0}">
+                    Found <strong th:text="${products.size()}">0</strong> 
+                    <span th:text="${products.size() == 1 ? 'product' : 'products'}">products</span>
+                    <span th:if="${search != null && !search.isEmpty()}">
+                        for "<strong th:text="${search}">search</strong>"
+                    </span>
+                </p>
+                <p th:if="${products.size() == 0}" class="no-results">
+                    No products found
+                    <span th:if="${search != null && !search.isEmpty()}">
+                        for "<strong th:text="${search}">search</strong>"
+                    </span>
+                </p>
+            </div>
+
+            <div class="products-grid">
+                <div th:each="product : ${products}">
+                    <div th:replace="~{fragments/components :: productCard(product=${product})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<div th:fragment="textInput(label, name, type, placeholder, helperText)"
+     class="form-group" xmlns:th="http://www.thymeleaf.org">
+    <label th:for="${name}" th:text="${label}">Label</label>
+    <input
+            th:type="${type} ?: 'text'"
+            th:id="${name}"
+            th:name="${name}"
+            th:placeholder="${placeholder}"
+            th:field="*{__${name}__}"
+            class="form-control"
+            th:hx-post="${'/validate-field?field=' + name}"
+            hx-trigger="blur"
+            hx-target="closest .form-group"
+            hx-swap="outerHTML">
+    <span th:if="${helperText != null and !#fields.hasErrors(name)}"
+          class="helper-text"
+          th:text="${helperText}">Helper text</span>
+    <div th:id="${name + '-validation'}">
+        <span th:if="${#fields.hasErrors(name)}"
+              class="error-text"
+              th:errors="*{__${name}__}">Error message</span>
+    </div>
+</div>
+
+<div th:fragment="fieldGroup" class="form-group" xmlns:th="http://www.thymeleaf.org" th:object="${user}">
+    <label th:for="${fieldName}" th:text="${label}">Label</label>
+    <input
+            th:type="${type}"
+            th:id="${fieldName}"
+            th:name="${fieldName}"
+            th:field="*{__${fieldName}__}"
+            th:placeholder="${placeholder}"
+            class="form-control"
+            th:hx-post="${'/validate-field?field=' + fieldName}"
+            hx-trigger="blur"
+            hx-target="closest .form-group"
+            hx-swap="outerHTML"
+            hx-preserve="true">
+    <span th:if="${helperText != null and !#fields.hasErrors(fieldName)}"
+          class="helper-text"
+          th:text="${helperText}">Helper text</span>
+    <span th:if="${#fields.hasErrors(fieldName)}"
+          class="error-text"
+          th:errors="*{__${fieldName}__}">Error message</span>
+</div>

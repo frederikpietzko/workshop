@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Components</title>
+</head>
+<body>
+
+<!-- Text Input Fragment -->
+<div th:fragment="textInput(field, label, type, placeholder)">
+    <div class="form-group">
+        <label th:for="${field}" th:text="${label}">Label</label>
+        <input 
+            th:type="${type != null ? type : 'text'}"
+            th:id="${field}" 
+            th:name="${field}" 
+            th:field="*{__${field}__}"
+            th:placeholder="${placeholder}"
+            th:classappend="${#fields.hasErrors(field) ? 'error' : ''}"
+            class="form-control"
+        />
+        <span class="error-message" th:if="${#fields.hasErrors(field)}" th:errors="*{__${field}__}">Error message</span>
+    </div>
+</div>
+
+<!-- Textarea Fragment -->
+<div th:fragment="textArea(field, label, placeholder, rows)">
+    <div class="form-group">
+        <label th:for="${field}" th:text="${label}">Label</label>
+        <textarea 
+            th:id="${field}" 
+            th:name="${field}" 
+            th:field="*{__${field}__}"
+            th:placeholder="${placeholder}"
+            th:rows="${rows != null ? rows : 4}"
+            th:classappend="${#fields.hasErrors(field) ? 'error' : ''}"
+            class="form-control"
+        ></textarea>
+        <span class="error-message" th:if="${#fields.hasErrors(field)}" th:errors="*{__${field}__}">Error message</span>
+    </div>
+</div>
+
+</body>
+</html>

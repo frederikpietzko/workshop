@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>make select</title>
+</head>
+<body>
+
+<!-- Model Select Fragment -->
+<select
+        th:id="${id}"
+        th:name="${name}"
+        th:fragment="modelSelect(id, name, models)"
+        th:value="${models.getFirst().getId()}"
+>
+    <option th:each="model : ${models}" th:value="${model.getId()}" th:text="${model.getName()}">Model Name</option>
+</select>
+
+</body>
+</html>

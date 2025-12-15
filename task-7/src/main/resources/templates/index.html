@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Item Manager</h1>
+        
+        <div class="form-section">
+            <h2>Create New Item</h2>
+            <div th:replace="~{fragments/form :: item-form}"></div>
+        </div>
+
+        <div class="table-section">
+            <h2>Items List</h2>
+            
+            <div th:if="${items.isEmpty()}" class="empty-message">
+                No items yet. Create your first item above!
+            </div>
+            
+            <table th:unless="${items.isEmpty()}" class="items-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Date Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td th:text="${item.name}">Item Name</td>
+                        <td th:text="${item.description ?: '-'}">Description</td>
+                        <td th:text="${#temporals.format(item.dateTimeAdded, 'yyyy-MM-dd HH:mm:ss')}">2024-01-01 12:00:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

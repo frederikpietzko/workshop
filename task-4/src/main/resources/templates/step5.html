@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Step 5: Order Confirmation</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Car Order Wizard</h1>
+
+    <div th:replace="~{fragments/form-elements :: wizard-steps(${currentStep})}"></div>
+
+    <h2>Step 5: Order Confirmation</h2>
+
+    <p style="margin-bottom: 30px; color: #555;">Please review your order details before confirming.</p>
+
+    <div class="summary-section">
+        <h3>Product Details</h3>
+        <div class="summary-item">
+            <span class="summary-label">Category:</span>
+            <span class="summary-value" th:text="${order.productCategory}">Category</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Make:</span>
+            <span class="summary-value" th:text="${order.make.name}">Make</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Model:</span>
+            <span class="summary-value" th:text="${order.model.name}">Model</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Quantity:</span>
+            <span class="summary-value" th:text="${order.quantity}">Quantity</span>
+        </div>
+    </div>
+
+    <div class="summary-section">
+        <h3>Customization</h3>
+        <div class="summary-item">
+            <span class="summary-label">Color:</span>
+            <span class="summary-value" th:text="${order.color}">Color</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Interior:</span>
+            <span class="summary-value" th:text="${order.interior}">Interior</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Tire Type:</span>
+            <span class="summary-value" th:text="${order.tireType}">Tire Type</span>
+        </div>
+    </div>
+
+    <div class="summary-section">
+        <h3>Delivery Information</h3>
+        <div class="summary-item">
+            <span class="summary-label">Delivery Address:</span>
+            <span class="summary-value" th:text="${order.deliveryAddress}">Address</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Contact Name:</span>
+            <span class="summary-value" th:text="${order.contactName}">Name</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Contact Email:</span>
+            <span class="summary-value" th:text="${order.contactEmail}">Email</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Contact Phone:</span>
+            <span class="summary-value" th:text="${order.contactPhone}">Phone</span>
+        </div>
+    </div>
+
+    <div class="summary-section">
+        <h3>Payment</h3>
+        <div class="summary-item">
+            <span class="summary-label">Payment Method:</span>
+            <span class="summary-value" th:text="${order.paymentMethod}">Method</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Billing Address:</span>
+            <span class="summary-value" th:text="${order.billingAddress}">Billing Address</span>
+        </div>
+    </div>
+
+    <form
+            th:action="@{/order/step5}"
+            method="post"
+            th:hx-post="@{/order/step5}"
+            hx-target="body"
+            hx-swap="outerHTML"
+            hx-push-url="true"
+    >
+        <div class="btn-group">
+            <a th:href="@{/order/step4}" class="btn btn-secondary">Previous</a>
+            <button type="submit" class="btn btn-success">Confirm Order</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

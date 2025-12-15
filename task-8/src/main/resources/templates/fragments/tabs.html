@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tabs</title>
+</head>
+<body>
+
+<div th:fragment="tabs(activeTab)" class="tabs">
+    <a th:href="@{/dashboard/users}" 
+       th:classappend="${activeTab == 'users' ? 'active' : ''}"
+       class="tab">
+        Users
+    </a>
+    <a th:href="@{/dashboard/roles}" 
+       th:classappend="${activeTab == 'roles' ? 'active' : ''}"
+       class="tab">
+        Roles
+    </a>
+    <a th:href="@{/dashboard/permissions}" 
+       th:classappend="${activeTab == 'permissions' ? 'active' : ''}"
+       class="tab">
+        Permissions
+    </a>
+</div>
+
+</body>
+</html>

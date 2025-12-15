@@ -1,0 +1,10 @@
+<ul
+    id="todo-list" class="todo-list" hx-swap-oob="true"
+    th:fragment="todo-list"
+    th:unless="${#lists.isEmpty(todos)}"
+>
+    <!--/*@thymesVar id="todos" type="java.util.List<iits.workshop.htmx.TodoItem>"*/-->
+    <th:block th:each="todo : ${todos}">
+        <li th:replace="~{fragments/todo-item :: todo-item(todo=${todo})}"></li>
+    </th:block>
+</ul>

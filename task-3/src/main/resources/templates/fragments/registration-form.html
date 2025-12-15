@@ -1,0 +1,41 @@
+<div th:fragment="form" xmlns:th="http://www.thymeleaf.org">
+    <!-- Success Message -->
+    <div th:if="${successMessage}" class="success-message">
+        <p th:text="${successMessage}">Success message</p>
+    </div>
+
+    <form th:action="@{/register}" th:object="${user}" method="post"
+          hx-post="/register"
+          hx-target="this"
+          hx-swap="outerHTML">
+
+        <!-- Username Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Username',
+            'username',
+            'text',
+            'Enter your username',
+            'Username must be 3-50 characters, letters, numbers and underscores only'
+        )}"></div>
+
+        <!-- Email Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Email',
+            'email',
+            'email',
+            'Enter your email address',
+            'We will never share your email with anyone'
+        )}"></div>
+
+        <!-- Password Field -->
+        <div th:replace="~{fragments/input :: textInput(
+            'Password',
+            'password',
+            'password',
+            'Enter your password',
+            'Password must be at least 8 characters with uppercase, lowercase, and number'
+        )}"></div>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+</div>

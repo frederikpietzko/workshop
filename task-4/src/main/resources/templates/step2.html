@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title>Step 2: Customization</title>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Car Order Wizard</h1>
+
+    <div th:replace="~{fragments/form-elements :: wizard-steps(${currentStep})}"></div>
+
+    <h2>Step 2: Customization</h2>
+
+    <form
+            th:action="@{/order/step2}"
+            th:object="${customizationForm}"
+            method="post"
+            th:hx-post="@{/order/step2}"
+            hx-target="body"
+            hx-swap="outerHTML"
+            hx-push-url="true"
+    >
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('color') ? 'has-error' : ''}">
+            <label>Color</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="color_black" name="color" value="Black" th:field="*{color}">
+                    <label for="color_black">Black</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="color_white" name="color" value="White" th:field="*{color}">
+                    <label for="color_white">White</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="color_silver" name="color" value="Silver" th:field="*{color}">
+                    <label for="color_silver">Silver</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="color_blue" name="color" value="Blue" th:field="*{color}">
+                    <label for="color_blue">Blue</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="color_red" name="color" value="Red" th:field="*{color}">
+                    <label for="color_red">Red</label>
+                </div>
+            </div>
+            <span class="helper-text">Select the exterior color for your vehicle</span>
+            <span th:if="${#fields.hasErrors('color')}"
+                  th:errors="*{color}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('interior') ? 'has-error' : ''}">
+            <label>Interior</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="interior_leather_black" name="interior" value="Leather Black" th:field="*{interior}">
+                    <label for="interior_leather_black">Leather Black</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="interior_leather_beige" name="interior" value="Leather Beige" th:field="*{interior}">
+                    <label for="interior_leather_beige">Leather Beige</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="interior_leather_brown" name="interior" value="Leather Brown" th:field="*{interior}">
+                    <label for="interior_leather_brown">Leather Brown</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="interior_fabric" name="interior" value="Fabric" th:field="*{interior}">
+                    <label for="interior_fabric">Fabric</label>
+                </div>
+            </div>
+            <span class="helper-text">Choose your interior material and color</span>
+            <span th:if="${#fields.hasErrors('interior')}"
+                  th:errors="*{interior}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('tireType') ? 'has-error' : ''}">
+            <label>Tire Type</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="tire_summer" name="tireType" value="Summer" th:field="*{tireType}">
+                    <label for="tire_summer">Summer Tires</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="tire_winter" name="tireType" value="Winter" th:field="*{tireType}">
+                    <label for="tire_winter">Winter Tires</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="tire_allseason" name="tireType" value="All Season" th:field="*{tireType}">
+                    <label for="tire_allseason">All Season Tires</label>
+                </div>
+            </div>
+            <span class="helper-text">Select the tire type suitable for your climate</span>
+            <span th:if="${#fields.hasErrors('tireType')}"
+                  th:errors="*{tireType}"
+                  class="error-message">Error</span>
+        </div>
+
+        <div class="btn-group">
+            <a th:href="@{/order/step1}" class="btn btn-secondary">Previous</a>
+            <button type="submit" class="btn">Next</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

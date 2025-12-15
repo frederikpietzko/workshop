@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Forms</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Registration Forms Demo</h1>
+
+    <div class="links">
+        <a href="/register" class="btn btn-primary">Working Registration Form</a>
+        <a href="/register-error" class="btn btn-danger">Registration Form with Error</a>
+    </div>
+
+    <div class="info">
+        <h2>About this demo</h2>
+        <p>This application demonstrates two registration forms:</p>
+        <ul>
+            <li><strong>Working Form:</strong> A properly functioning registration form with validation</li>
+            <li><strong>Error Form:</strong> A form that intentionally throws a 500 error on submission</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

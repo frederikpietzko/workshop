@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Components</title>
+</head>
+<body>
+
+<!-- Text Input Fragment -->
+<div th:fragment="textInput(field, label, type, placeholder)">
+    <div class="form-group">
+        <label th:for="${field}" th:text="${label}">Label</label>
+        <input 
+            th:type="${type != null ? type : 'text'}"
+            th:id="${field}" 
+            th:name="${field}" 
+            th:field="*{__${field}__}"
+            th:placeholder="${placeholder}"
+            th:classappend="${#fields.hasErrors(field) ? 'error' : ''}"
+            class="form-control"
+        />
+        <span class="error-message" th:if="${#fields.hasErrors(field)}" th:errors="*{__${field}__}">Error message</span>
+    </div>
+</div>
+
+<!-- Toast Notification Fragment -->
+<div th:fragment="toast(message, type)">
+    <div th:class="'toast toast-' + ${type}" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon" th:text="${type == 'error' ? '✕' : '✓'}">✓</span>
+            <span class="toast-message" th:text="${message}">Message</span>
+        </div>
+        <button class="toast-close" onclick="closeToast()">×</button>
+    </div>
+</div>
+
+<!-- Loading Spinner Fragment -->
+<div th:fragment="spinner">
+    <div class="spinner htmx-indicator">
+        <div class="spinner-ring"></div>
+        <div class="spinner-text">Loading...</div>
+    </div>
+</div>
+
+</body>
+</html>

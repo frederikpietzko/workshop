@@ -1,0 +1,13 @@
+<!--/*@thymesVar id="todo" type="iits.workshop.htmx.TodoItem"*/-->
+<span
+        th:fragment="todo-item-text(todo)"
+        th:id="'todo-item-text-'+${todo.id}"
+        th:text="${todo.text}"
+        hx-trigger="click"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-include="this"
+        th:hx-get="@{/edit/{id}(id=${todo.id})}"
+        class="todo-text"
+        xmlns:th="http://www.thymeleaf.org"
+>Todo text</span>

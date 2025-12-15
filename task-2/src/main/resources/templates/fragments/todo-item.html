@@ -1,0 +1,23 @@
+<!--/*@thymesVar id="todo" type="iits.workshop.htmx.TodoItem"*/-->
+<li th:id="'todo-item-'+${todo.id}" th:fragment="todo-item(todo)" class="todo-item" th:classappend="${todo.done} ? 'done' : ''">
+    <input type="checkbox"
+           class="todo-checkbox"
+           th:checked="${todo.done}"
+           th:hx-put="@{/todos/{id}/toggle(id=${todo.id})}"
+           hx-target="closest .todo-item"
+           hx-swap="outerHTML"
+    >
+
+    <span th:replace="~{fragments/todo-item-text :: todo-item-text(todo=${todo})}"></span>
+
+    <div class="todo-actions">
+        <button
+                th:hx-delete="@{/todos/{id}/delete(id=${todo.id})}"
+                hx-target="closest .todo-item"
+                hx-swap="delete"
+                type="button"
+                class="btn btn-delete">
+            Delete
+        </button>
+    </div>
+</li>
