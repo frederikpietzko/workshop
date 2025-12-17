@@ -10,6 +10,7 @@
         <module name="workshop.task-4.main" />
         <module name="workshop.task-1.main" />
         <module name="workshop.task-7.main" />
+        <module name="workshop.task-9.main" />
         <module name="workshop.task-8.main" />
         <module name="workshop.task-3.main" />
         <module name="workshop.task-5.main" />
@@ -45,6 +46,9 @@
       <module name="workshop.task-8" options="-parameters" />
       <module name="workshop.task-8.main" options="-parameters" />
       <module name="workshop.task-8.test" options="-parameters" />
+      <module name="workshop.task-9" options="-parameters" />
+      <module name="workshop.task-9.main" options="-parameters" />
+      <module name="workshop.task-9.test" options="-parameters" />
     </option>
   </component>
 </project>
