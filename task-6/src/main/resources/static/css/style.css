@@ -253,14 +253,14 @@ form {
     }
 }
 
-/* Spinner / Loading Indicator */
+/* Loading Indicator */
 .spinner {
     display: none;
     text-align: center;
     margin-top: 20px;
 }
 
-.spinner.htmx-indicator.htmx-request {
+.spinner.htmx-request {
     display: block;
 }
 

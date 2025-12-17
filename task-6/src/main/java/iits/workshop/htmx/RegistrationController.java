@@ -2,6 +2,7 @@ package iits.workshop.htmx;
 
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.validation.Valid;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,8 +56,10 @@ public class RegistrationController {
     }
 
     @PostMapping("/register-error")
+    @SneakyThrows
     public String registerUserWithError(@Valid @ModelAttribute("user") User user,
                                        BindingResult bindingResult) {
+        Thread.sleep(1000);
         throw new IllegalStateException("An error occurred during registration.");
     }
 }
