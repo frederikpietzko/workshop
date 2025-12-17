@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Input field fragment with error handling -->
+<div th:fragment="input(id, name, label, value, type, errors)" class="form-group">
+    <label th:for="${id}" th:text="${label}">Label</label>
+    <input 
+        th:id="${id}" 
+        th:name="${name}" 
+        th:type="${type ?: 'text'}" 
+        th:value="${value}"
+        th:classappend="${errors != null && errors.hasFieldErrors(name)} ? 'error' : ''"
+        class="form-input">
+    <span 
+        th:if="${errors != null && errors.hasFieldErrors(name)}" 
+        th:text="${errors.getFieldError(name)?.defaultMessage}"
+        class="error-message">
+        Error message
+    </span>
+</div>
+
+<!-- Helper text fragment -->
+<p th:fragment="helper(text)" class="helper-text" th:text="${text}">Helper text</p>
+
+<!-- Error message fragment -->
+<div th:fragment="error(message)" class="error-box">
+    <p th:text="${message}">Error message</p>
+</div>
+
+<!-- Success message fragment -->
+<div th:fragment="success(message)" class="success-box">
+    <p th:text="${message}">Success message</p>
+</div>
+
+</html>
