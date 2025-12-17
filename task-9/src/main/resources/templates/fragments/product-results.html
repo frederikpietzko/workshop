@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="results" id="results">
+    <!-- Table Info -->
+    <div th:replace="~{fragments/table-info :: tableInfo(totalItems=${totalItems}, currentPage=${currentPage}, totalPages=${totalPages})}"></div>
+
+    <!-- Data Table -->
+    <div class="table-wrapper">
+        <table th:replace="~{fragments/data-table :: dataTable(search=${search}, category=${category}, currentPage=${currentPage}, sortBy=${sortBy}, direction=${direction}, products=${products})}"></table>
+    </div>
+
+    <!-- Pagination -->
+    <div th:replace="~{fragments/paginations :: pagination(hasPrevious=${hasPrevious}, search=${search}, category=${category}, currentPage=${currentPage}, totalPages=${totalPages}, sortBy=${sortBy}, direction=${direction}, hasNext=${hasNext})}"></div>
+</div>
+
+</html>

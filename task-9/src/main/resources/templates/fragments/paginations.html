@@ -1,0 +1,23 @@
+<div th:fragment="pagination(hasPrevious, search, category, currentPage, totalPages, sortBy, direction, hasNext)" id="pagination" class="pagination">
+    <button th:if="${hasPrevious}"
+            class="btn btn-secondary"
+            th:hx-get="@{/products/table(sortBy=${sortBy}, direction=${direction}, page=${currentPage - 1})}"
+            hx-target="#results"
+            hx-include="#search-input, #category-filter">
+        ← Previous
+    </button>
+    <span th:unless="${hasPrevious}" class="btn btn-disabled">← Previous</span>
+
+    <span class="page-info">
+        Page <strong th:text="${currentPage + 1}">1</strong> of <strong th:text="${totalPages}">1</strong>
+    </span>
+
+    <button th:if="${hasNext}"
+            class="btn btn-secondary"
+            th:hx-get="@{/products/table(sortBy=${sortBy}, direction=${direction}, page=${currentPage + 1})}"
+            hx-target="#results"
+            hx-include="#search-input, #category-filter">
+        Next →
+    </button>
+    <span th:unless="${hasNext}" class="btn btn-disabled">Next →</span>
+</div>

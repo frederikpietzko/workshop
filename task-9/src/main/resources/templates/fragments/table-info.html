@@ -1,0 +1,4 @@
+<div th:fragment="tableInfo(totalItems, currentPage, totalPages)" id="table-info" class="table-info">
+    <p>Total items: <strong th:text="${totalItems}">0</strong></p>
+    <p>Page <strong th:text="${currentPage + 1}">1</strong> of <strong th:text="${totalPages}">1</strong></p>
+</div>
