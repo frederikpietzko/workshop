@@ -38,13 +38,13 @@ public class RegistrationController {
                               BindingResult bindingResult,
                               Model model) {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "fragments/form-container :: form-container";
         }
 
         userService.registerUser(user);
         model.addAttribute("success", true);
         model.addAttribute("errors", List.of());
-        return "register";
+        return "fragments/form-container :: form-container";
     }
 
     @GetMapping("/register-error")
