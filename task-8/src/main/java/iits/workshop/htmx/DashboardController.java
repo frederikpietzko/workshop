@@ -1,5 +1,6 @@
 package iits.workshop.htmx;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,33 @@ public class DashboardController {
         model.addAttribute("users", users);
         model.addAttribute("activeTab", "users");
         return "dashboard";
+    }
+
+    @GetMapping("/users")
+    @SneakyThrows
+    public String showUsersPage(Model model) {
+        Thread.sleep(1000);
+        List<User> users = dashboardService.getAllUsers();
+        model.addAttribute("users", users);
+        return "fragments/tables :: usersTable";
+    }
+
+    @GetMapping("/roles")
+    @SneakyThrows
+    public String showRolesPage(Model model) {
+        Thread.sleep(1000);
+        List<Role> roles = dashboardService.getAllRoles();
+        model.addAttribute("roles", roles);
+        return "fragments/tables :: rolesTable";
+    }
+
+    @GetMapping("/permissions")
+    @SneakyThrows
+    public String showPermissionsPage(Model model) {
+        Thread.sleep(1000);
+        List<Permission> permissions = dashboardService.getAllPermissions();
+        model.addAttribute("permissions", permissions);
+        return "fragments/tables :: permissionsTable";
     }
 
     @GetMapping("/dashboard/roles")
