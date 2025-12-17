@@ -74,7 +74,6 @@ public class ItemController {
         emitter.onCompletion(() -> emitters.remove(emitter));
         emitter.onTimeout(() -> emitters.remove(emitter));
         emitter.onError((e) -> emitters.remove(emitter));
-
         return emitter;
     }
 
