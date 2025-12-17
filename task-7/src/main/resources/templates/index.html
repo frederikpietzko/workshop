@@ -6,6 +6,7 @@
     <title>Item Manager</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx-ext-sse@2.2.4"></script>
 </head>
 <body>
     <div class="container">
@@ -18,12 +19,8 @@
 
         <div class="table-section">
             <h2>Items List</h2>
-            
-            <div th:if="${items.isEmpty()}" class="empty-message">
-                No items yet. Create your first item above!
-            </div>
-            
-            <table th:unless="${items.isEmpty()}" class="items-table">
+
+            <table class="items-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -31,12 +28,11 @@
                         <th>Date Added</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="item : ${items}">
-                        <td th:text="${item.name}">Item Name</td>
-                        <td th:text="${item.description ?: '-'}">Description</td>
-                        <td th:text="${#temporals.format(item.dateTimeAdded, 'yyyy-MM-dd HH:mm:ss')}">2024-01-01 12:00:00</td>
-                    </tr>
+                <tbody hx-ext="sse"
+                       sse-connect="/items/stream"
+                       sse-swap="message"
+                       hx-swap="beforeend">
+                    <tr th:each="item : ${items}" th:insert="~{fragments/row-fragment :: row(item=${item})}"></tr>
                 </tbody>
             </table>
         </div>
