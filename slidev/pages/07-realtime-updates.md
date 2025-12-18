@@ -450,7 +450,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
 </head>
 <body>
