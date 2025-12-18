@@ -33,12 +33,12 @@ public class RegistrationController {
                               BindingResult bindingResult, 
                               Model model) {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "fragments/register-form :: registerForm";
         }
         
         userService.registerUser(user);
         model.addAttribute("success", true);
-        return "register";
+        return "fragments/register-form :: registerForm";
     }
 
     @GetMapping("/register-error")

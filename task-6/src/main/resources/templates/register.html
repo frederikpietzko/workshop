@@ -14,26 +14,8 @@
         <div th:if="${success}" class="success-message">
             Registration successful!
         </div>
-        
-        <form th:object="${user}" 
-              hx-post="/register" 
-              hx-target="#form-container"
-              hx-swap="outerHTML"
-              hx-indicator="#spinner">
-            
-            <div id="form-container">
-                <div th:replace="~{fragments/components :: textInput('username', 'Username', 'text', 'Enter username')}"></div>
-                <div th:replace="~{fragments/components :: textInput('email', 'Email', 'email', 'Enter email')}"></div>
-                <div th:replace="~{fragments/components :: textInput('password', 'Password', 'password', 'Enter password')}"></div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <a href="/" class="btn btn-secondary">Back</a>
-                </div>
-            </div>
-            
-            <div th:replace="~{fragments/components :: spinner}"></div>
-        </form>
+
+        <div th:replace="~{fragments/register-form :: registerForm(user=${user})}"></div>
     </div>
 </body>
 </html>
